@@ -152,6 +152,27 @@ def randn_like(
     )
 
 
+@to_ivy_arrays_and_back
+def randn_like(
+    input,
+    *,
+    dtype=None,
+    layout=None,
+    device=None,
+    requires_grad=False,
+    memory_format=None
+):
+    shape = input.shape
+    if not dtype:
+        dtype = input.dtype
+
+    return ivy.random_normal(
+        shape=shape,
+        dtype=dtype,
+        device=device,
+    )
+
+
 @with_supported_dtypes(
     {
         "1.11.0 and below": (
